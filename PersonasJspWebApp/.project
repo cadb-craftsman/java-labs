@@ -3,7 +3,6 @@
 	<name>PersonasJspWebApp</name>
 	<comment></comment>
 	<projects>
-		<project>PersonasBBDDBasic</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
