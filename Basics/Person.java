@@ -14,6 +14,67 @@ public class Person{
     private static final String TIRED = "I am tired";
     private static final String LOST = "I am lost";
 
+    public void setName(String name){
+        this.name = name;
+    }
+
+    public String getName(){
+        return name;
+    }
+
+    public void setLastName(String lastName){
+        this.lastName = lastName;
+    }
+
+    public String getLastName(){
+        return lastName;
+    }
+
+    public void setHeight(double height) {
+        this.height = height;
+    }
+
+    public double getHeight() {
+        return height;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setGenre(String genre) {
+        this.genre = genre;
+    }
+
+    public String getGenre() {
+        return genre;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public Person(){
+
+    }
+
+    public Person(String name, String lastName, double height, int age, String genre, String color){
+        this.name = name;
+        this.lastName = lastName;
+        this.height = height;
+        this.age = age;
+        this.genre = genre;
+        this.color = color;
+    }
+
     public String walk(double distance){
         if(distance < 10){
             System.out.println(HAPPY);
@@ -54,4 +115,5 @@ public class Person{
 
         return ideas;
     }
+
 }
