@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.1.xsd">
+
+	<bean id="configBeanList" class="com.bookstore.config.ConfigBeanList" />
+
+	<!-- Se crea un bean del tipo GestionAdaptar que inicializara los beans del listado de beans  -->	
+	<bean id="gestionAdapter" class="com.bookstore.gestion.GestionNegocioAdapter" >
+		<property name="configBeanList" ref="configBeanList" />
+	</bean>
+					
+	<!-- Se crea un bean del tipo INegocioAdapter por medio del factory bean para inyectar las instancias de los beans que se busquen -->
+	<bean id="negocioAdapter" factory-bean="gestionAdapter" factory-method="getINegocioAdapter" />
+			
+	<!-- Se crea un bean del tipo BB_BusquedaNormal para inyectarlo al MB_Navegacion -->
+	<bean id="bbBusqueda" class="com.bookstore.bbeans.BB_Busqueda" />
+	
+	<!-- Se crea un bean del tipo BB_LibrosList para almacenar los libros de la consulta -->
+	<bean id="bbLibros" class="com.bookstore.bbeans.BB_LibrosList" />
+
+	<!-- Se crea un bean del tipo BB_LibrosList para almacenar los libros de la consulta -->
+	<bean id="bbLibrosO" class="com.bookstore.bbeans.BB_LibrosList" />
+
+	<!-- Se crea un bean del tipo BB_LibrosList para almacenar los libros de la consulta -->
+	<bean id="bbLibrosN" class="com.bookstore.bbeans.BB_LibrosList" />
+
+	<!-- Se crea un bean del tipo BB_LibrosList para almacenar los libros de la consulta -->
+	<bean id="bbLibrosR" class="com.bookstore.bbeans.BB_LibrosList" />
+	
+	<!-- Se crea un bean del tipo BB_LibrosList para almacenar los libros de la consulta -->
+	<bean id="bbLibrosC" class="com.bookstore.bbeans.BB_LibrosList" />
+	
+	<!-- Se crea un bean del tipo BB_Cliente para dar de alta un cliente -->
+	<bean id="bbCliente" class="com.bookstore.bbeans.BB_Cliente" />
+
+	<!-- Se crea un bean del tipo BB_Carrito para añadir al carrito -->
+	<bean id="bbCarrito" class="com.bookstore.bbeans.BB_Carrito" />
+	
+</beans>

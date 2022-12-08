@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<bean id="configBeanList" class="com.bookstore.config.ConfigBeanList" />
+	
+	<bean id="gestionFactoryAdapter" class="com.bookstore.gestion.GestionFactoryAdapter">
+		<property name="configBeanList" ref="configBeanList" />
+	</bean>
+	
+	<!-- Se crea un eban del tipo IFcatoryAdapter para accedera los bean Daos de la aplcacion -->
+	<bean id="factoryAdapter" factory-bean="gestionFactoryAdapter" factory-method="getIFactoryAdapter" /> 
+	
+</beans>

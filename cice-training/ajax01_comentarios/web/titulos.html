@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>AJAX(01) - Comentarios</title>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link href="estilos.css" rel="stylesheet" type="text/css" /> 
+
+        <script language="javascript">
+            var xhr;
+            function buscarComentario(){
+                if(window.ActiveXObject){
+                    //Explorer (incluyendo 6 o anterior)
+                    xhr=new ActiveXObject("Microsoft.XMLHttp");      
+                    enviaPeticion();
+                }
+                else if((window.XMLHttpRequest) || (typeof XMLHttpRequest)!=undefined){
+                    //Explorer 7 y superiores y resto
+                    xhr=new XMLHttpRequest();
+                    enviaPeticion();
+                }
+                else{
+                    alert("Su navegador no tiene soporte para AJAX");
+                }
+            }
+            function enviaPeticion(){   
+                var lista = document.getElementById("producto");
+                var eleccion=lista.options[lista.selectedIndex].value;
+
+                xhr.open("GET","comentariolibro?producto="+eleccion,true);
+                xhr.onreadystatechange=procesaDatos;
+                xhr.send(null);
+            }
+            function procesaDatos(){ 
+                if(xhr.readyState==4)
+                    document.getElementById("comentario").innerHTML="<em>"+xhr.responseText+"</em>";
+            }
+        </script>
+    </head>
+    <body>
+        <div id="contenedor">
+            <h2>AJAX(01) - Comentarios</h2>
+            <div id="body">
+                <p>Elija su producto (libro):</p>
+                <p><select id="producto" onchange="buscarComentario();">
+                        <option>- Seleccione título -</option>
+                        <option value="0">Parque Jurásico (Michael Crichton)</option>
+                        <option value="1">Crónicas de la Dragonlance (Margaret Weis, Tracy Hickman)</option>
+                        <option value="2">Sin noticias de Gurb (Eduardo Mendoza)</option>
+                        <option value="3">Sherlock Holmes anotado (Arthur Conan Doyle)</option>
+                    </select></p>
+                <p id="comentario"></p>
+            </div>
+        </div>
+    </body>
+</html>

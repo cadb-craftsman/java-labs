@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- Se importa el xml DaoBean -->
+	<import resource="daoBean.xml"/>
+		
+	<!-- Se configura el factory bean de catalogo -->
+	<bean id="factoryClienteDao" class="com.bookstore.factoria.FactoryClienteDao">
+		<property name="tipoDao" ref="configDataBase" />	
+		<property name="jdbcTemplate" ref="jdbcTemplate" />
+	</bean>
+	
+	<!-- Se configura el bean de configuracion dao -->
+	<bean id="clienteDao" factory-bean="factoryClienteDao" factory-method="getClienteDao" />
+	
+</beans>

@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+    <head>
+        <title>AJAX(04) - tienda JSON</title>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link href="estilos.css" rel="stylesheet" type="text/css" /> 
+        <script src="utilidades.js" language="javascript"></script>
+        <script language="javascript">
+            var obj;
+            function cargarSecciones(){
+                obj=new ObjetoAJAX();
+                //llama al servlet y devuelve un array de secciones
+                obj.enviar("secciones","GET","procesaSecciones", null);  
+            }
+            function cargarProductos(){
+                obj=new ObjetoAJAX();
+                var oForm=document.forms[0];
+                //llama al servlet y devuelve un array de productos,
+                //pasando los datos de la sección elegida
+                obj.enviar("productos","post","procesaProductos", oForm); 
+            }
+            function procesaSecciones(){
+                var secciones=eval("("+obj.respuestaTexto()+")");
+               
+                var opcionInicio=document.createElement("option");
+                var textoOpcion=document.createTextNode("-Indique la Seccion-");
+                opcionInicio.appendChild(textoOpcion);
+                var lista=document.getElementById("secciones");
+                lista.appendChild(opcionInicio);
+                //genera el resto de opciones de la lista a partir 
+                //de los datos recibidos en la respuesta
+                for(var elm = 0;elm < secciones.length;elm++){
+                    var item=document.createElement("option");
+                    item.setAttribute("value",secciones[elm].id);
+                    var texto=document.createTextNode(secciones[elm].nombre);
+                    item.appendChild(texto);
+                    document.getElementById("secciones").appendChild(item);
+                }
+            }
+            function procesaProductos(){
+                var productos=eval("("+obj.respuestaTexto()+")");
+                var tabla="<table>";
+                tabla+="<tr><th>Nombre</th><th>Descripcion</th>";
+                tabla+="<th>Precio (€)</th></tr>";
+                //genera el contenido de la tabla a partir 
+                //de los datos recibidos en la respuesta
+                for(var elm = 0;elm < productos.length;elm++){
+                    tabla+="<tr>";
+                    tabla+="<td>"+productos[elm].producto+"</td>";
+                    tabla+="<td>"+productos[elm].descripcion+"</td>";
+                    tabla+="<td>"+productos[elm].precio+"</td>";
+                    tabla+="</tr>";
+                }
+                tabla+="</table>";
+                document.getElementById("listado").innerHTML=tabla;
+            }        
+        </script>
+    </head>
+    <body onload="cargarSecciones();">
+        <div id="contenedor">
+            <h2>AJAX(04) - tienda JSON</h2>
+            <div id="body">        
+                <h3>Secciones</h3>
+                <form action="Productos" method="post">
+                    <select id="secciones" name="secciones">              
+                    </select>
+                    <br/><br/>
+                    <input type="button" onclick="cargarProductos();"
+                           value="ver productos"/>
+                </form>
+                <br/>
+                <br/>
+                <div id="listado"></div>
+            </div>
+        </div>
+    </body>
+</html>

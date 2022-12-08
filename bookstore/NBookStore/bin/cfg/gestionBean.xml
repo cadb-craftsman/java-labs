@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<import resource="factoryBean.xml"/>
+	
+	<bean id="gestionBeanAdapter" class="com.bookstore.gestion.GestionBeanAdapter">
+		<property name="factoryAdapter" ref="factoryAdapter" />
+	</bean>
+
+	<bean id="negocioUsuario" factory-bean="gestionBeanAdapter" factory-method="getNegocioUsuario" />
+	
+	<bean id="negocioOferta" factory-bean="gestionBeanAdapter" factory-method="getNegocioOferta" />
+	
+	<bean id="negocioLibro" factory-bean="gestionBeanAdapter" factory-method="getNegocioLibro" />
+	
+	<bean id="negocioCliente" factory-bean="gestionBeanAdapter" factory-method="getNegocioCliente" />
+
+	<bean id="negocioCatalogo" factory-bean="gestionBeanAdapter" factory-method="getNegocioCatalogo" />
+
+	<bean id="negocioAlmacen" factory-bean="gestionBeanAdapter" factory-method="getNegocioAlmacen" />
+
+</beans>

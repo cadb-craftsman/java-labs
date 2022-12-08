@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- Se carga el properties donde se encuentran los datos de la conexion a la base de datos -->
+	<bean id="propertieConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location" value="cfg/configuracion.properties"/>
+	</bean>
+
+	<!-- Se carga el dataSource con los datos obtenidos del properties que se tiene configurado -->
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="${jdbc.driver}"/>
+		<property name="url"             value="${jdbc.url}"/>
+		<property name="username"        value="${jdbc.username}"/>
+		<property name="password"        value="${jdbc.password}"/>		
+	</bean>
+	
+	<!-- Se configra el jdbcTemplate para la conexion con la bbdd -->
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+
+	<bean id="configDataBase" class="com.bookstore.config.Configuration">
+		<property name="typeDB" value="${database.type}"/>		
+	</bean>
+
+</beans>

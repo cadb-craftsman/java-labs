@@ -1,0 +1,38 @@
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Hotal Web Page</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+    <body>
+        <h1>Menu Hotel el Paso</h1>
+        <form name="datosUsuario" action="MostrarMenu.do" method="get" target="">        
+            <div>
+                <label id="lblUsuario" name="lblUsuario" >Usuario: </label>
+                <input id="txtUsuario" name="txtUsuario" type="text" />
+            </div>
+            <div>
+                <label id="lblHabitacion" name="lblUsuario" >Habitación: </label>
+                <select id="cmbHabitacion" name="cmbHabitacion" type="select">
+                    <option>N-1 Individual</option>
+                    <option>N-2 Individual</option>
+                    <option>N-3 Individual</option>
+                    <option>N-4 Matrimonial</option>
+                    <option>N-5 Matrimonial</option>
+                    <option>N-6 VIP</option>
+                    <option>N-7 VIP</option>
+                    <option>N-8 Presidencial</option>
+                    <option>N-9 Presidencial</option>
+                    <option>N-10 De Luxe</option>
+                </select>                
+            </div>
+            <div>
+                <input id="enviar" name="evento" type="submit" value="ConsultarMenu"/>
+            </div>
+        </form>
+    </body>
+</html>

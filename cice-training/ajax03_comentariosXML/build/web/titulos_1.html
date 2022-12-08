@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>AJAX(01) - Comentarios</title>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link href="estilos.css" rel="stylesheet" type="text/css" /> 
+
+        <script language="javascript">
+            var xhr;
+            function crearObjeto(){
+                if(window.ActiveXObject){
+                    //Explorer (incluyendo 6 o anterior)
+                    xhr=new ActiveXObject("Microsoft.XMLHttp");      
+                }
+                else if((window.XMLHttpRequest) || (typeof XMLHttpRequest)!=undefined){
+                    //Explorer 7 y superiores y resto
+                    xhr=new XMLHttpRequest();
+                }
+                else{
+                    alert("Su navegador no tiene soporte para AJAX");
+                }
+            }
+            function buscarComentario(){
+                crearObjeto();
+                if(xhr!=undefined){
+                    var titulo=document.getElementById("titulo");
+                    var tit=titulo.options[titulo.selectedIndex].value;
+                    xhr.open("GET","comentariolibro?tit="+tit,true);
+                    xhr.onreadystatechange=presentaComentario;
+                    xhr.send(null);
+                }
+            }
+            function buscarTitulos(){
+                crearObjeto();
+                if(xhr!=undefined){
+                    xhr.open("GET","tituloslibro",true);
+                    xhr.onreadystatechange=presentaTitulos;
+                    xhr.send(null);
+                }
+            }
+            function presentaComentario(){
+                if(xhr.readyState==4){
+                    document.getElementById("comentario").innerHTML=xhr.responseText;
+                    xhr=undefined;
+                }
+            }
+            function presentaTitulos(){
+                if(xhr.readyState==4){
+                    var results=xhr.responseXML;
+                    var titulos=results.getElementsByTagName("titulo");
+                    var valores=results.getElementsByTagName("orden");
+                    //crea la primera opción de la lista
+                    //y la añade a esta
+                    var opcionInicio=document.createElement("option");
+                    var textoOpcion=document.createTextNode("-Seleccione Título-");
+                    opcionInicio.appendChild(textoOpcion);
+                    var lista=document.getElementById("titulo");
+                    lista.appendChild(opcionInicio);
+                    //genera el resto de opciones de la lista a partir 
+                    //de los datos recibidos en la respuesta
+                    for(var elm = 0;elm < titulos.length;elm++){
+                        var item=document.createElement("option");
+                        item.setAttribute("value",valores.item(elm).firstChild.nodeValue);
+                        var texto=document.createTextNode(titulos.item(elm).firstChild.nodeValue);
+                        item.appendChild(texto);
+                        document.getElementById("titulo").appendChild(item);
+                    }
+                    xhr=undefined;
+                }
+            }
+        </script>
+    </head>
+    <body onload="buscarTitulos();">
+        <div id="contenedor">
+            <h2>AJAX(03) - Comentarios XML</h2>
+            <div id="body">
+                <p>Elija su producto (libro):</p>
+                <table width="30%">
+                    <tr>
+                        <td>
+                            <select id="titulo" onchange="buscarComentario();">
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <br/><br/>
+                            <div id="comentario"></div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>

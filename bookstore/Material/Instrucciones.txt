@@ -1,0 +1,36 @@
+Proyecto Web BookStore Online 
+
+Requerimientos de instalación:
+
+- MySQL WorkBench 5.2
+- Spring Tool Suite 2.9.1
+- Apache Tomcat 7.0
+
+Para el correcto funcionamiento de la aplicación se deben realizar los siguientes pasos.
+
+1.- Crear un workspace con spring tool suite 2.9.1
+
+2.- Importar los proyectos dentro del workspace
+	- DCommons
+	- DJSF2.0
+	- DMySQL
+	- DSpring3.1.1
+	- IBookStore
+	- NBookStore
+	- WBookStore
+
+3.- Si se producen errores por las dependencias DCommons, DJSF2.0, DMySQL, DSpring3.1.1
+Se tienen que crear unas librerias de usuario y añadir los jars de las mismas descritas anteriormente
+para que se corrijan los errores de dependencias.
+
+4.- Una vez que se tengan los proyectos correctamente configurados se debe desplegar la aplicación en 
+el servidor Apache Tomcat 7.0
+
+5.- Para que las imagenes de los libros se muestren correctamente estas deben estar instaladas dentro 
+de la carpeta Html/images y debe coincidir el nombre de estas con el codigo isbn del libro, por ejemplo
+
+- Si el ISBN del libro es: 0123456789
+- La imagen debera llamarse: 0123456789.jpg
+
+NOTA: Se deja el war WBookStore.war en la carpeta de Codigo para que se agregue directamente en la configuracion de 
+Apache Tomcat 7.0

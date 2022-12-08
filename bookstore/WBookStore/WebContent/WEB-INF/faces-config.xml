@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<faces-config
+    xmlns="http://java.sun.com/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd"
+    version="2.0">	
+    <!-- Se configura el resolver de Spring Framework para el manejo de DI -->     
+	<application>
+		<el-resolver>
+			org.springframework.web.jsf.el.SpringBeanFacesELResolver
+		</el-resolver>
+	</application>
+	<managed-bean>
+		<description>Manage bean que contiene el listado de la busqueda</description>
+		<managed-bean-name>mbResultados</managed-bean-name>
+		<managed-bean-class>com.bookstore.mbeans.MB_Resultados</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+		<managed-property>
+			<property-name>negocioAdapter</property-name>
+			<property-class>com.bookstore.adapter.interfaz.INegocioAdapter</property-class>
+			<value>#{negocioAdapter}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>bbLibros</property-name>
+			<property-class>com.bookstore.bbeans.BB_LibrosList</property-class>
+			<value>#{bbLibros}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>bbBusqueda</property-name>
+			<property-class>com.bookstore.bbeans.BB_Busqueda</property-class>
+			<value>#{bbBusqueda}</value>
+		</managed-property>
+	</managed-bean>
+	<managed-bean>
+		<description>Se realiza el listado de ofertas y novedades</description>
+		<managed-bean-name>mbLOferNov</managed-bean-name>
+		<managed-bean-class>com.bookstore.mbeans.MB_LOfertasNovedades</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+		<managed-property>
+			<property-name>negocioAdapter</property-name>
+			<property-class>com.bookstore.adapter.interfaz.INegocioAdapter</property-class>
+			<value>#{negocioAdapter}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>bbOfertas</property-name>
+			<property-class>com.bookstore.bbeans.BB_LibrosList</property-class>
+			<value>#{bbLibrosO}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>bbNovedades</property-name>
+			<property-class>com.bookstore.bbeans.BB_LibrosList</property-class>
+			<value>#{bbLibrosN}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>bbRecomendaciones</property-name>
+			<property-class>com.bookstore.bbeans.BB_LibrosList</property-class>
+			<value>#{bbLibrosR}</value>
+		</managed-property>
+	</managed-bean>
+	<managed-bean>
+		<description>Manage bean de navegacion de un cliente</description>
+		<managed-bean-name>mbNavCliente</managed-bean-name>
+		<managed-bean-class>com.bookstore.mbeans.MB_NavegacionCliente</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+		<managed-property>
+			<property-name>bbCliente</property-name>
+			<property-class>com.bookstore.bbeans.BB_Cliente</property-class>
+			<value>#{bbCliente}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>negocioAdapter</property-name>
+			<property-class>com.bookstore.adapter.interfaz.INegocioAdapter</property-class>
+			<value>#{negocioAdapter}</value>
+		</managed-property>
+	</managed-bean>
+	<managed-bean>
+		<description>Manage bean del carrito de compra</description>
+		<managed-bean-name>mbCarrito</managed-bean-name>
+		<managed-bean-class>com.bookstore.mbeans.MB_Carrito</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+		<managed-property>
+			<property-name>bbCarrito</property-name>
+			<property-class>com.bookstore.bbeans.BB_Carrito</property-class>
+			<value>#{bbCarrito}</value>
+		</managed-property>
+	</managed-bean>
+	<managed-bean>
+		<description>Contiene todas las navegaciones de la aplicacion.</description>
+		<managed-bean-name>mbNavegaciones</managed-bean-name>
+		<managed-bean-class>com.bookstore.mbeans.MB_Navegaciones</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<description>Manage bean de categorias</description>
+		<managed-bean-name>mbCategorias</managed-bean-name>
+		<managed-bean-class>com.bookstore.mbeans.MB_Categorias</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+		<managed-property>
+			<property-name>bbCategorias</property-name>
+			<property-class>com.bookstore.bbeans.BB_LibrosList</property-class>
+			<value>#{bbLibrosC}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>negocioAdapter</property-name>
+			<property-class>com.bookstore.adapter.interfaz.INegocioAdapter</property-class>
+			<value>#{negocioAdapter}</value>
+		</managed-property>
+	</managed-bean>
+ 	
+</faces-config>
